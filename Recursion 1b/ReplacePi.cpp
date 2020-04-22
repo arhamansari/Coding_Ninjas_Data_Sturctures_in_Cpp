@@ -1,45 +1,45 @@
-Check Case
-Send Feedback
-Write a program that takes a character as input and prints either 1, 0 or -1 according to the following rules.
-1, if the character is an uppercase alphabet (A - Z)
-0, if the character is a lowercase alphabet (a - z)
--1, if the character is not an alphabet
-Input format :
-Single Character
-Output format :
-1 or 0 or -1
-Constraints :
-Input can be any character
+Replace pi (recursive)
+Given a string, compute recursively a new string where all appearances of "pi" have been replaced by "3.14".
 Sample Input 1 :
-v
-Sample Output 1 :
-0
+xpix
+Sample Output :
+x3.14x
 Sample Input 2 :
-V
-Sample Output 2 :
-1
+pipi
+Sample Output :
+3.143.14
 Sample Input 3 :
-#
-Sample Output 3 :
--1
-
-
-/****************************************** SOLUTION *************************************************************************************/
-
-#include<iostream>
-using namespace std;
-int main() {
-	// Write your code here
-	char a;
-    cin>> a;
-    
-    if(a >='a' && a <='z'){
-        cout<<"0";
+pip
+Sample Output :
+3.14p
+	
+	
+/******************************************** SOLUTION **********************************************************************************/
+	
+int length(char input[]) {
+    int len = 0;
+    for(int i = 0; input[i] != '\0'; i++) { 
+        len++;
     }
-    else if(a >= 'A' && a <= 'Z'){
-        cout<<"1";
+    return len;
+}
+void replacePi(char input[], int start) { 
+    if(input[start] == '\0' || input[start+1] == '\0') {
+        return;
     }
-    else{
-        cout<<"-1";
+    replacePi(input, start+1);
+    if(input[start] == 'p' && input[start+1] == 'i') {
+        int len = length(input);
+        input[len+2] = '\0';
+        for(int i = len-1; i >= start+2; i--) { 
+            input[i+2] = input[i];
+        } 
+        input[start] = '3';
+        input[start+1] = '.'; 
+        input[start+2] = '1';
+        input[start+3] = '4';
     }
+}
+void replacePi(char input[]) {
+    replacePi(input, 0);
 }
